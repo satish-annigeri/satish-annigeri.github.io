@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Installing Anaconda Scientific Python on Microsoft Windows - Satish Annigeri's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Installing Anaconda Scientific Python on Microsoft Windows"/>
+            <meta property="og:url" content="/installing-anaconda-scientific-python.html"/>
+            <meta property="og:description" content="Installing and managing Anaconda scientific Python distribution on Microsoft Windows"/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/borland.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Satish Annigeri's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/installing-anaconda-scientific-python.html"
+                       rel="bookmark"
+                       title="Permalink to Installing Anaconda Scientific Python on Microsoft Windows">
+                        Installing Anaconda Scientific Python on Microsoft Windows
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-08-14T00:00:00"> 14 Aug, 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Installing and managing Anaconda scientific Python distribution on Microsoft Windows<!-- PELICAN_END_SUMMARY --></p>
+<p>Python along with scientific computing modules NumPy, Matplotlib, SciPy, Pandas, SymPy and the rest is an excellent platform for numerical computation and data visualization. IPython Notebook has changed the way scientific computing is done, taught and shared. But installing and configuring the scientific computing Python stack is even now a non-trivial task. Distributions such as <a href="http://www.continuum.io">Anaconda</a> and <a href="http://www.enthought.com">Canopy</a> have addressed this problem, and to a great extent, have succeeded. This post describes installing and confuring Anaconda on Microsoft Windows.</p>
+<p>Both Anaconda and Canopy bundle Python along with most of the scientific computing modules in a single installation file. They also include IPython and an IDE. Each also contains a package manager to add modules that are not bundled with the initial installation. The package manager can update or remove installed packages.</p>
+<p>While both Python distributions have similar features, this post covers Anaconda as that is the one I use. Anaconda has a few features that I think are better:</p>
+<ol>
+<li>Has both Python 2 and Python 3 versions.</li>
+<li>The package manager <code>conda</code> can create and manage multiple virtual Python .</li>
+<li>Create and manage multiple virtual environments, similar to <code>virtualenv</code>.</li>
+<li>Package manager <code>conda</code> can be installed from <a href="http://pypi.python.org">PyPi</a> and can then integrate with the Anaconda Python repository.</li>
+<li>Install <code>miniconda</code>, a minimal Python environment and add only those packages you need.</li>
+<li>Create conda compatible packages from your code.</li>
+</ol>
+<h3>Downloading Anaconda</h3>
+<p>Anaconda Python can be downloaded from Continuum Analytics website at [http://continuum.io/downloads]. You can choose the install file appropriate for your operating systems. Versions are available for Microsoft Windows, GNU/Linux and Mac OS X. Both 32-bit and 64-bit versions are available.</p>
+<p>Once downloaded, installation is straight forward. It is best to choose all default options during installation. Typically, Anaconda is installed on <code>C:\Anaconda</code>. This creates the default environment and has no name. Instead of Anaconda, you can download and install <code>miniconda</code> and you can then start with a minimal default environment and add only the modules you need.</p>
+<h3>Managing the Anaconda Default Environment</h3>
+<p>You can list, add, update and remove packages with the Anaconda package manager <code>conda</code>. You can also search the Anaconda package repository by package name. You can install specific versions of packages instead of the most recent which is installed by default.</p>
+<p><code>conda</code> package manager is a command line tool and can be used from the MS-DOS Prompt. If you chose to add Anaconda to the <code>PATH</code> environment variable during install, it can be accessed from any directory.</p>
+<p>You can display help about <code>conda</code> in multiple ways.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda <span class="nb">help</span>
+
+C:<span class="se">\&gt;</span>conda -h
+
+C:<span class="se">\&gt;</span>conda <span class="nb">help </span>create
+
+C:<span class="se">\&gt;</span>conda create -h
+</pre></div>
+
+
+<p>You can view information about the installed Anaconda Python.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda info
+Current conda install:
+
+             platform : win-64
+        conda version : 3.6.0
+  conda-build version : 1.3.5
+       python version : 2.7.7.final.0
+     requests version : 2.3.0
+     root environment : C:<span class="se">\A</span>naconda  <span class="o">(</span>writable<span class="o">)</span>
+  default environment : C:<span class="se">\A</span>naconda
+     envs directories : C:<span class="se">\A</span>naconda<span class="se">\e</span>nvs
+        package cache : C:<span class="se">\A</span>naconda<span class="se">\p</span>kgs
+         channel URLs : http://repo.continuum.io/pkgs/free/win-64/
+                        http://repo.continuum.io/pkgs/pro/win-64/
+          config file : None
+    is foreign system : False
+</pre></div>
+
+
+<p>You can view the list of all installed packages. Packages installed by <code>pip</code> package manager are indicated with <code>&lt;pip&gt;</code> in the third column.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda list
+<span class="c"># packages in environment at C:\Anaconda:</span>
+<span class="c">#</span>
+_license                  1.1                      py27_0
+alembic                   0.6.5                     &lt;pip&gt;
+anaconda                  2.0.1                np18py27_0
+...
+xlwt                      0.7.5                    py27_0
+yapsy                     1.10.423                  &lt;pip&gt;
+zope.interface            4.1.1                     &lt;pip&gt;
+</pre></div>
+
+
+<p>You can search the Anaconda package reporitory for a package you are looking for by choosing a suitable search pattern. If there is a package in the repository matching your pattern, you are shown the complete list of all available versions, with the installed version indicated by an asterisk.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda search 
+Fetching package metadata: ..
+matplotlib                   1.1.1                np16py27_2  defaults        
+                             1.2.0                np16py27_0  defaults        
+                             1.2.0                np17py33_1  defaults        
+                             1.2.0                np17py27_1  defaults        
+                             1.2.0                np16py27_1  defaults        
+                             1.2.1                np17py33_0  defaults        
+                             1.2.1                np17py27_0  defaults        
+                             1.2.1                np17py33_1  defaults        
+                             1.2.1                np17py27_1  defaults        
+                             1.3.0                np17py33_0  defaults        
+                             1.3.0                np17py27_0  defaults        
+                             1.3.1                np17py33_0  defaults        
+                             1.3.1                np17py27_0  defaults        
+                             1.3.1                np18py33_1  defaults        
+                             1.3.1                np18py27_1  defaults        
+                             1.3.1                np17py33_1  defaults        
+                             1.3.1                np17py27_1  defaults        
+                          .  1.3.1                np18py34_2  defaults        
+                             1.3.1                np18py33_2  defaults        
+                          *  1.3.1                np18py27_2  defaults        
+                             1.3.1                np18py26_2  defaults        
+</pre></div>
+
+
+<p>Installing a package requires you to know the name of the package, which you can find either from <code>conda search</code> or from information available from various sources on the Internet or books. Multiple packages can be installed at one go.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda install numpy matplotlib scipy
+</pre></div>
+
+
+<p>Installing a version of a package older than the most recent can be done as follows:</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda install <span class="nv">matplotlib</span><span class="o">=</span>1.2.0
+</pre></div>
+
+
+<p>Updating an installed package is done by specifying the name of the package to be updated. The correct name of the installed package can be determined from the <code>conda list</code> command.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>C:<span class="se">\&gt;</span>conda update matplotlib
+</pre></div>
+
+
+<p>Removing an installed package is done by specifying the name of the package to be removed.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda remove matplotlib
+</pre></div>
+
+
+<h3>Virtual Environments</h3>
+<p>Traditinally, virtual Python environments are created and managed with <code>virtualenv</code>. A virtual environment is a sandbox with its own installation of Python and additional packages separate from others. This facilitates creation of custom Python installation along with only the required packages for the purpose of development, testing and any other use.</p>
+<p><code>conda</code>, in addition to managing packages, can also create and manage virtual environments. Each environment must be assigned a unique name which is used to activate it as well as manage it. Thus, it is possible to have a Python 2 environment alongside a Python 3 environment an duse one of them at an y given time. It is also posisble to specify the version of Python or the version of additionlal packages. When a new environment is created, unless specified otherwise, the version of Python installed for the new environment is the same as the one in the default environment. After creating an environment, packages can be added to it, and <code>conda</code> installes the versions appropriate to the version of Python for the specific environment.</p>
+<p>Creating a new environment requires you to specify a name for the environment.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda create -n flask
+</pre></div>
+
+
+<p>You can specify the packages to be installed into the environment after creating the environment.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda create -n flask python flask
+</pre></div>
+
+
+<p>You can specify the version of Python, if different from the default environment.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda create -n py3flask <span class="nv">python</span><span class="o">=</span>3.4 flask
+</pre></div>
+
+
+<p>You can view the information about the newly created environment with the <code>conda info</code> command. Almost every command described above for the default environment works for a named virtual environment if you specify the environment by name on which the command is to be applied, but not all commands (for example <code>conda info -n py3flask</code> does not work).</p>
+<p>As an example, to list all packages intalled in the <code>py3flask</code> environment, the command is <code>conda list -n py3flask</code>. It is possible to update, remove packages in a specific environment.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>conda update -n py3flask flask
+C:<span class="se">\&gt;</span>conda remove -n py3flask flask
+</pre></div>
+
+
+<p>There is no command to delete an existing environment. But deleting the directory where the environment is installed accomplishes the task. The installed directory can be found using the <code>conda info</code> command.</p>
+<p>To use a specific environment, you have to activate it.</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>activate py3flask
+</pre></div>
+
+
+<p>The system prompt changes. the name of the environment appears to the left of the system prompt as a reminder of the environment in use. You have access to all system commands but only the active Python environment is available. To finish working in the environment, use the deactivate command</p>
+<div class="highlight"><pre>C:<span class="se">\&gt;</span>deactivate
+</pre></div>
+
+
+<p>You return to the normal system prompt.</p>
+<h3>Installing Packages using <code>pip</code></h3>
+<p>The popular package manager for Python, at least at present, is <code>pip</code>. <code>pip</code> has the same features that were described for <code>conda</code> above because, in my opinion, <code>conda</code> is consciously designed to resemble it. Thus, <code>pip help</code>, <code>pip list</code>, <code>pip install</code> all work. But, there are some differences too. Updating an installed package is <code>pip install -U flask</code>. Removing an installed package is <code>pip uninstall flask</code>. Since <code>pip</code> does not create and manage environments, the <code>-n</code> switch does not apply. Since Anaconda package repository is a subset of the Python Packahe Index (PyPI), you will have to use <code>pip</code> when you wish to install a package that is not in the Anaconda repository. But <code>conda</code> handles that gracefully, it even indicates which packages are installed from PyPI when you ask for the list of installed packages with <code>conda list</code>. You can thus have a mix of packages from both repositories.</p>
+<h3>Other Features of <code>conda</code></h3>
+<p>In addition to the features described above, <code>conda</code> can build packages that can be uploaded to the <a href="https://binstar.org/">Binstar</a> service available from Continuum Analytics. Both free and paid plans are available. Another feature is the conversion of <code>conda</code> packages. There are a few more, but I am yet to use them and so will save it for another post, if at all.</p>
+<h3>Anaconda on GNU/Linux</h3>
+<p><code>conda</code> works almost identically on GNU/Linux as on Microsoft Windows. There are two differences, however. The commands to activate and deactivate are as follows:</p>
+<div class="highlight"><pre><span class="nv">$source</span> activate py3flask
+<span class="nv">$source</span> deactivate
+</pre></div><script type= "text/javascript">
+    if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+        var mathjaxscript = document.createElement('script');
+        mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+        mathjaxscript.type = 'text/javascript';
+        mathjaxscript.src = 'https:' == document.location.protocol
+                ? 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+                : 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+        mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+            "MathJax.Hub.Config({" +
+            "    config: ['MMLorHTML.js']," +
+            "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+            "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+            "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+            "    displayAlign: 'center'," +
+            "    displayIndent: '0em'," +
+            "    showMathMenu: true," +
+            "    tex2jax: { " +
+            "        inlineMath: [ ['$','$'] ], " +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true," +
+            "        preview: 'TeX'," +
+            "    }, " +
+            "    'HTML-CSS': { " +
+            "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+            "    } " +
+            "}); ";
+        (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+    }
+</script>
+
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></li>
+        <li><a href="/writing-a-python-function.html">Writing a Python Function</a></li>
+        <li><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></li>
+        <li><a href="/ipython-notebook.html">IPython Notebook</a></li>
+        <li><a href="/python-classes.html">Python Classes</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="https://twitter.com/satish_annigeri"><i
+                            class="fa fa-twitter-square fa-lg"></i> Twitter
+                    </a></li>
+                    <li class="list-group-item"><a href="http://in.linkedin.com/in/satishannigeri/"><i
+                            class="fa fa-linkedin-square fa-lg"></i> LinkedIn
+                    </a></li>
+                    <li class="list-group-item"><a href="http://github.com/satish-annigeri"><i
+                            class="fa fa-github-square fa-lg"></i> github
+                    </a></li>
+                  </ul>
+                </li>
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="/category/misc.html">
+                                <i class="fa fa-folder-open fa-lg"></i> misc
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/programming.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/scicomp.html">
+                                <i class="fa fa-folder-open fa-lg"></i> SciComp
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/structural-engg.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Structural Engg
+                            </a>
+                        </li>
+                </li>
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/python.html">
+                                Python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/programming.html">
+                                Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/oop.html">
+                                OOP
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numerical-methods.html">
+                                Numerical Methods
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/c.html">
+                                C++
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/arrays.html">
+                                Arrays
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/scientific-computing.html">
+                                Scientific Computing
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numpy.html">
+                                NumPy
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/direct-stiffness-method.html">
+                                Direct Stiffness Method
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/structural-analysis.html">
+                                Structural Analysis
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/ipython.html">
+                                IPython
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/foss.html">
+                                FOSS
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/fortran.html">
+                                Fortran
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/scilab.html">
+                                Scilab
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/notebook.html">
+                                Notebook
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/matplotlib.html">
+                                Matplotlib
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/book-review.html">
+                                Book Review
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/blogging.html">
+                                Blogging
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/people.html">
+                                People
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://store.continuum.io/cshop/anaconda/" target="_blank">
+                Anaconda
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Satish Annigeri
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-53542526-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

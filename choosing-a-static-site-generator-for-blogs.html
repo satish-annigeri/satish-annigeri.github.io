@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Satish Annigeri's Blog</title>
+    <title>Choosing a Static Site Generator for Blogs - Satish Annigeri's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     
 
     <!-- Open Graph tags -->
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content="Satish Annigeri's Blog"/>
-            <meta property="og:url" content=""/>
-            <meta property="og:description" content="Satish Annigeri's Blog"/>
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Choosing a Static Site Generator for Blogs"/>
+            <meta property="og:url" content="/choosing-a-static-site-generator-for-blogs.html"/>
+            <meta property="og:description" content="Choosing a blogging tool is not as simple as it seems"/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
@@ -56,62 +56,71 @@ Satish Annigeri's Blog            </a>
     <div class="row">
         <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></h2>
-                <div class="summary"><p>Installing and managing Anaconda scientific Python distribution on Microsoft Windows
-                    <a class="btn btn-default btn-xs" href="/installing-anaconda-scientific-python.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/choosing-a-static-site-generator-for-blogs.html"
+                       rel="bookmark"
+                       title="Permalink to Choosing a Static Site Generator for Blogs">
+                        Choosing a Static Site Generator for Blogs
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-08-06T00:00:00"> 06 Aug, 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/blogging.html">Blogging</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choosing-a-static-site-generator-for-blogs.html">Choosing a Static Site Generator for Blogs</a></h2>
-                <div class="summary"><p>Choosing a blogging tool is not as simple as it seems
-                    <a class="btn btn-default btn-xs" href="/choosing-a-static-site-generator-for-blogs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></h2>
-                <div class="summary"><p>Installing scientific Python software and a review of some popular scientific Python distributions.
-                    <a class="btn btn-default btn-xs" href="/installing-python3-scientific-computing-environment.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></h2>
-                <div class="summary"><p>In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module. 
-                    <a class="btn btn-default btn-xs" href="/importing-module-into-a-python-program.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></h2>
-                <div class="summary"><p>Extracting values from and inserting values into a Python list object is intuitive and powerful.
-                    <a class="btn btn-default btn-xs" href="/numpy-array-indexing.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stifness-method-overview.html">Direct Stiffness Method - An Overview</a></h2>
-                <div class="summary"><p>A brief overview of the direct stiffness method as applicable to skeletal structures. 
-                    <a class="btn btn-default btn-xs" href="/direct-stifness-method-overview.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-arrays.html">NumPy Arrays</a></h2>
-                <div class="summary"><p>NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays.
-                    <a class="btn btn-default btn-xs" href="/numpy-arrays.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stiffness-method-dof-numbering.html">Direct Stiffness Method - Degree of Freedom Numbering</a></h2>
-                <div class="summary"><p>An introduction to numbering degree of freedom numbers for direct stiffness method of analysis of skeletal structures.
-<!-- PELICAN_END_SUMMARY --></p>
-<p>Direct stiffness method of analysis of skeletal structures represents skeletal structures using one dimensional truss or beam elements and sets up the stiffness equation, namely:</p>
-<p>$$[K]{x} = {P}$$</p>
-<p>where $[K]$ is the structure ...</p><script type= "text/javascript">
+                <p>Choosing a blogging tool is not as simple as it seems<!-- PELICAN_END_SUMMARY --></p>
+<p>When I got started with my first blog, I chose Blogger. There were several reasons that helped me make up my mind. It was fairly simple to use, came as a part of Google apps, had a choice of themes, allowed me to assign my own domain name. Analytics were great too.</p>
+<p>But it had many shortcomings. Getting it to do syntax highlighting of code was a daunting task. Many people reported being able to do it, but I could never get it to work. Themes and layouts were limited and modifying them was complex. Math typesetting appeared impossible. After using it for 3 years, it was time to look for better solutions. I decided to clarify for myself what I expected from a good blogging tool.</p>
+<ol>
+<li>
+<p><strong>Static site generators v/s blogging engines such as Wordpress et al:</strong> Static site generators (SSGs) are simple, get the job done with the least fuss and generally get out of your way. Comments may need integration with external tools such as Disqus but overall, simple is better.</p>
+</li>
+<li>
+<p><strong>Code syntax highlighting:</strong> Many posts include code. Displaying code with syntax highlighting is an important requirement.</p>
+</li>
+<li>
+<p><strong>Typesetting mathematics:</strong> especially in $\LaTeX$ is essential to make posts containing mathematics meaningful and complete.</p>
+</li>
+<li>
+<p><strong>Theme and layout:</strong> Choosing simple and elegant themes without having to become a web designer is important.</p>
+</li>
+<li>
+<p><strong>Including IPython Notebooks:</strong> I use IPython Notebooks in my work. Being able to include them in my blog has become an important requirement.</p>
+</li>
+</ol>
+<h3>Static Site Generators</h3>
+<p>Static site generators provide a framework wherein you write your post in a markup language such as Markdown or reStructured Text and the SSG generates a static web site, complete with navigation, sidebar, categories, tags and archives. They are primarly blogging tools and treat posts in a special chronological way. Some allow creating pages, which are not posts. You also get a user  customizable theme and layout.</p>
+<p><a href="http://sphinx-doc.org/#">Sphinx</a> does a similar thing, but for documentation and is not suited for a blog. Popular choices appeared to be <a href="http://getnikola.com/">Nikola</a>, <a href="http://blog.getpelican.com/">Pelican</a> and <a href="http://mynt.uhnomoli.com/">Mynt</a>. Nikola and Pelican have similar features while Mynt lacked the completeness of the other two. These are some of the features Nikola and Pelican have:</p>
+<ol>
+<li>Themable</li>
+<li>Navigation, categories, tags, archives, feeds and pages</li>
+<li>Posts are treated in a special way</li>
+<li>Allow static pages, which are treated differently compared to posts</li>
+<li>Support for both Markdown and reST</li>
+</ol>
+<h3>Typesetting Math and render_math Plugin for MathJax</h3>
+<p>Both Markdown and reStructured text can syntax highlight code, but only reST can typeset math. But it is possible to customize Markdown to use MathJax to achieve this. I preferred Markdown so being able to typeset math in Markdown was a requirement. Pelican had a plugin for this purpose, <code>render_math</code>. Mynt did not have it, but Andrew Fricke was gracious enough to modify Mynt 0.3 beta to do this. Nikola didn't seem to have a plugin for MathJax. So the choice appeared to be Pelican.</p>
+<p>I installed the <code>render_math</code> plugin. Initially I had some difficulty understanding how to integrate plugins. I put the configuration code in <code>settings.py</code> and it wasn't working at all. Then I realized I should have put that code in <code>pelicanconf.py</code>. Then it worked like a charm.</p>
+<h3>Theme</h3>
+<p>I started off with a bare bones Pelican site with the <code>notmyidea</code> default theme. While it worked, the theme was not to my taste. I then found the <code>pelican-bootstrap3</code> theme and the Bootswatch customization of Bootstrap 3. That helped me make up my mind. I turned off categories from the navigation and created a single static page <strong>About Me</strong> and enabled static pages on the navigation. I chose the Bootswatch United theme which imitates the Ubuntu website.</p>
+<h3>Final Verdict</h3>
+<p>It took me some time to copy paste posts from Blogger and convert them to markdown. I guess I could have found an import from blogger script somewhere, but the articles weren't too many and so I decided to do it manually. MathJax markup and code had to be done manually anyway. And here is the result for you to see. Google analytics is working and Disqus integration is planned. Google AdSense is some way off.</p>
+<p>It was a great learning experience. I got to understand better how Jinja2 templates work. I got to get a look into how Bootstrap works. Understood a little bit about integrating MathJax into web pages. All in all, it was worth the time I spent.</p><script type= "text/javascript">
     if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
         var mathjaxscript = document.createElement('script');
         mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -142,36 +151,11 @@ Satish Annigeri's Blog            </a>
     }
 </script>
 
-                    <a class="btn btn-default btn-xs" href="/direct-stiffness-method-dof-numbering.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ipython-notebook.html">IPython Notebook</a></h2>
-                <div class="summary"><p>Interactive Python in your browser.
-                    <a class="btn btn-default btn-xs" href="/ipython-notebook.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/python-class-for-numerical-integration.html">A Python Class for Numerical Integration</a></h2>
-                <div class="summary"><p>A Python class implementation of Trapezoidal and Simpson's 1/3 rules. 
-                    <a class="btn btn-default btn-xs" href="/python-class-for-numerical-integration.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
 
-    <ul class="pagination">
-            <li class="prev disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a
-                        href="/index.html">1</a></li>
-                <li class=""><a
-                        href="/index2.html">2</a></li>
-                <li class=""><a
-                        href="/index3.html">3</a></li>
-            <li class="next"><a
-                    href="/index2.html">&raquo;</a></li>
-    </ul>
         </div>
         <div class="col-sm-3 well well-sm" id="sidebar">
 

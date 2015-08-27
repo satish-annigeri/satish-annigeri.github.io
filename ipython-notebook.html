@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Satish Annigeri's Blog</title>
+    <title>IPython Notebook - Satish Annigeri's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     
 
     <!-- Open Graph tags -->
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content="Satish Annigeri's Blog"/>
-            <meta property="og:url" content=""/>
-            <meta property="og:description" content="Satish Annigeri's Blog"/>
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="IPython Notebook"/>
+            <meta property="og:url" content="/ipython-notebook.html"/>
+            <meta property="og:description" content="Interactive Python in your browser."/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
@@ -56,62 +56,77 @@ Satish Annigeri's Blog            </a>
     <div class="row">
         <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></h2>
-                <div class="summary"><p>Installing and managing Anaconda scientific Python distribution on Microsoft Windows
-                    <a class="btn btn-default btn-xs" href="/installing-anaconda-scientific-python.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/ipython-notebook.html"
+                       rel="bookmark"
+                       title="Permalink to IPython Notebook">
+                        IPython Notebook
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-03-14T00:00:00"> 14 Mar, 2012</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/ipython.html">IPython</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/notebook.html">Notebook</a>
+        /
+	<a href="/tag/scientific-computing.html">Scientific Computing</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choosing-a-static-site-generator-for-blogs.html">Choosing a Static Site Generator for Blogs</a></h2>
-                <div class="summary"><p>Choosing a blogging tool is not as simple as it seems
-                    <a class="btn btn-default btn-xs" href="/choosing-a-static-site-generator-for-blogs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></h2>
-                <div class="summary"><p>Installing scientific Python software and a review of some popular scientific Python distributions.
-                    <a class="btn btn-default btn-xs" href="/installing-python3-scientific-computing-environment.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></h2>
-                <div class="summary"><p>In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module. 
-                    <a class="btn btn-default btn-xs" href="/importing-module-into-a-python-program.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></h2>
-                <div class="summary"><p>Extracting values from and inserting values into a Python list object is intuitive and powerful.
-                    <a class="btn btn-default btn-xs" href="/numpy-array-indexing.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stifness-method-overview.html">Direct Stiffness Method - An Overview</a></h2>
-                <div class="summary"><p>A brief overview of the direct stiffness method as applicable to skeletal structures. 
-                    <a class="btn btn-default btn-xs" href="/direct-stifness-method-overview.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-arrays.html">NumPy Arrays</a></h2>
-                <div class="summary"><p>NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays.
-                    <a class="btn btn-default btn-xs" href="/numpy-arrays.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stiffness-method-dof-numbering.html">Direct Stiffness Method - Degree of Freedom Numbering</a></h2>
-                <div class="summary"><p>An introduction to numbering degree of freedom numbers for direct stiffness method of analysis of skeletal structures.
-<!-- PELICAN_END_SUMMARY --></p>
-<p>Direct stiffness method of analysis of skeletal structures represents skeletal structures using one dimensional truss or beam elements and sets up the stiffness equation, namely:</p>
-<p>$$[K]{x} = {P}$$</p>
-<p>where $[K]$ is the structure ...</p><script type= "text/javascript">
+                <p>Interactive Python in your browser.<!-- PELICAN_END_SUMMARY --></p>
+<p>IPython is a souped up Python shell with features such as inline help, tab completion, enhanced support for NumPy, SciPy and Matplotlib and a host of magic functions (IPython commands that begin with %).</p>
+<p>But with version 0.12, IPython goes one step further. It now introduces a web based notebook. This means that you can access IPython running as a web server, either on your local machine or on a server on the network, and access the same interactive IPython shell through your browser.</p>
+<p>An IPython Notebook typically has cells, which can b eeither <strong>code cells</strong> or <strong>Markdown cells</strong>. Code cells can contain Python code. Code cells have syntax highlighting. When you want to execute the code you have typed, click the <strong>Run</strong> button at the top. Output is inserted inline. If your code produces a graphical output using Matplotlib, the graph is shown in a separate window that pops up. You can show graphical input inline with the magic command <code>%matplotlib inline</code> at the beginning of your code.</p>
+<p>Markdown cells can contain text in Markdown format and can include rich media. You can also embed $\LaTeX$ equations. IPython uses MathJax to display math, which is downloaded from the MathJac CDN when needed. It is possible to install and use a local copy MathJax if you want to display math when not connected to the Internet.</p>
+<p>An IPython Notebook is a simple text file in JSON format. SO you can share a notebook with a friend and the friend can simply run the Notebook to see the code, your documentation and comments as well as output. Being a simple text file, it is easy to integrate with a version control system. The possibilities, especially for teaching and larning appear endless. You could run your own IPython notebook server and access it from anywhere through the network, to code, develop, test and/or run Python code.</p>
+<p>Here are the dependencies:
+1. IPython version 0.12 or higher. If you have an older version, do <code>easy_install -U ipython</code>. If you don't have <code>easy_install</code>, you can install it using <code>setuptools</code> either from your operating system package manager (GNU/Linux) or download and install (Microsoft Windows) from PyPI and install with the command <code>python setup.py</code>
+2. Tornado version 2.2. Tornado is a Python web server. If you don't have Tornado installed, install it with the command easy_install tornado</p>
+<p>You are now ready to run IPython notebook server. You can open a console (GNU/Linux) or an MS-DOS prompt (Microsoft Windows) and run the command</p>
+<div class="highlight"><pre><span class="n">prompt</span><span class="o">&gt;</span><span class="n">ipython</span> <span class="n">notebook</span>
+</pre></div>
+
+
+<p>This will run the Tornado web server and automatically open your browser showing you a web GUI. You can see the IPython prompt and start typing Python code. When done, press Shift+Enter to execute the code and see the results. To shutdown the IPython notebook server, go back to the console/MS-DOS Prompt and press Ctrl+C.</p>
+<p>If you work with NumPy, SciPy and Matplotlib and don't want to bother with importing these modules each time. Simply start IPython notebook server as follows:</p>
+<div class="highlight"><pre><span class="n">prompt</span><span class="o">&gt;</span><span class="n">ipython</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">pylab</span>
+</pre></div>
+
+
+<p>To see inline graphs within the browser (instead of them popping up), use the following command to start IPython notebook server</p>
+<div class="highlight"><pre><span class="n">prompt</span><span class="o">&gt;</span><span class="n">ipython</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">pylab</span> <span class="kr">inline</span>
+</pre></div>
+
+
+<p>You can create a new notebook, save it for use in subsequent sessions, download notebooks to your local storage and upload notebooks from your computer to the notebook server. Here is a screencast (no audio on this one, sorry) to demonstrate basic features of IPython notebook server on Microsoft WIndows. I also tried it on Ubuntu 11.10 and it worked without a hitch.</p>
+<h3>Update</h3>
+<p>IPython and IPython Notebook have undergone rapid development over the past year. IPython Notebook has become the de facto standard for presentations at most IPython conferences. IPython now has <code>nbconvert</code> built-in into itself and is no longer a separate command. IPython is now language agnostic and can run kernels of other dynamic interactive languages such as Julia, R and a few others. A new project has been hived off from IPython which is programming language agnostic, and is called <a href="http://jupyter.org/">Jupyter</a>. Integration of IPython Notebooks into Google Docs is already complete and is expected to be universally available shortly. Kudos to Fernando Perez and the IPython team for giving a software tool that is a game changer for education and open science.</p>
+<p>Here are some changes as of IPython 2.1.0 that you must note:</p>
+<ol>
+<li>To display graphics inline, the option <code>inline</code> is no longer available. Instead, use the magic statement <code>%matplotlib inline</code> at the very start of your notebook.</li>
+<li>To convert your Notebook to several supported formats, use one of the following commands</li>
+</ol>
+<div class="highlight"><pre><span class="n">ipython</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">html</span> <span class="n">mynotebook</span><span class="p">.</span><span class="n">ipynb</span>
+<span class="n">ipython</span> <span class="n">nbconvert</span> <span class="n">mynotebook</span><span class="p">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">to</span> <span class="n">latex</span>
+<span class="n">ipython</span> <span class="n">nbconvert</span> <span class="n">mynotebook</span><span class="p">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">to</span> <span class="n">latex</span> <span class="o">--</span><span class="n">post</span> <span class="n">PDF</span>
+<span class="n">ipython</span> <span class="n">nbconvert</span> <span class="n">mynotebook</span><span class="p">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">to</span> <span class="n">slides</span> <span class="o">--</span><span class="n">post</span> <span class="n">serve</span>
+</pre></div><script type= "text/javascript">
     if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
         var mathjaxscript = document.createElement('script');
         mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -142,36 +157,21 @@ Satish Annigeri's Blog            </a>
     }
 </script>
 
-                    <a class="btn btn-default btn-xs" href="/direct-stiffness-method-dof-numbering.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ipython-notebook.html">IPython Notebook</a></h2>
-                <div class="summary"><p>Interactive Python in your browser.
-                    <a class="btn btn-default btn-xs" href="/ipython-notebook.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/python-class-for-numerical-integration.html">A Python Class for Numerical Integration</a></h2>
-                <div class="summary"><p>A Python class implementation of Trapezoidal and Simpson's 1/3 rules. 
-                    <a class="btn btn-default btn-xs" href="/python-class-for-numerical-integration.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-    <ul class="pagination">
-            <li class="prev disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a
-                        href="/index.html">1</a></li>
-                <li class=""><a
-                        href="/index2.html">2</a></li>
-                <li class=""><a
-                        href="/index3.html">3</a></li>
-            <li class="next"><a
-                    href="/index2.html">&raquo;</a></li>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></li>
+        <li><a href="/scientific-python-develeopment-tools.html">Scientific Python Development Tools</a></li>
+        <li><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></li>
+        <li><a href="/numpy-arrays.html">NumPy Arrays</a></li>
+        <li><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></li>
     </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3 well well-sm" id="sidebar">
 

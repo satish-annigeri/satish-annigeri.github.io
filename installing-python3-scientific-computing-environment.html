@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Satish Annigeri's Blog</title>
+    <title>Installing a Python 3 Scientific Computing Environment - Satish Annigeri's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     
 
     <!-- Open Graph tags -->
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content="Satish Annigeri's Blog"/>
-            <meta property="og:url" content=""/>
-            <meta property="og:description" content="Satish Annigeri's Blog"/>
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Installing a Python 3 Scientific Computing Environment"/>
+            <meta property="og:url" content="/installing-python3-scientific-computing-environment.html"/>
+            <meta property="og:description" content="Installing scientific Python software and a review of some popular scientific Python distributions."/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
@@ -56,62 +56,45 @@ Satish Annigeri's Blog            </a>
     <div class="row">
         <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></h2>
-                <div class="summary"><p>Installing and managing Anaconda scientific Python distribution on Microsoft Windows
-                    <a class="btn btn-default btn-xs" href="/installing-anaconda-scientific-python.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/installing-python3-scientific-computing-environment.html"
+                       rel="bookmark"
+                       title="Permalink to Installing a Python 3 Scientific Computing Environment">
+                        Installing a Python 3 Scientific Computing Environment
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-08-05T00:00:00"> 05 Aug, 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/scientific-computing.html">Scientific Computing</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choosing-a-static-site-generator-for-blogs.html">Choosing a Static Site Generator for Blogs</a></h2>
-                <div class="summary"><p>Choosing a blogging tool is not as simple as it seems
-                    <a class="btn btn-default btn-xs" href="/choosing-a-static-site-generator-for-blogs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></h2>
-                <div class="summary"><p>Installing scientific Python software and a review of some popular scientific Python distributions.
-                    <a class="btn btn-default btn-xs" href="/installing-python3-scientific-computing-environment.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></h2>
-                <div class="summary"><p>In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module. 
-                    <a class="btn btn-default btn-xs" href="/importing-module-into-a-python-program.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></h2>
-                <div class="summary"><p>Extracting values from and inserting values into a Python list object is intuitive and powerful.
-                    <a class="btn btn-default btn-xs" href="/numpy-array-indexing.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stifness-method-overview.html">Direct Stiffness Method - An Overview</a></h2>
-                <div class="summary"><p>A brief overview of the direct stiffness method as applicable to skeletal structures. 
-                    <a class="btn btn-default btn-xs" href="/direct-stifness-method-overview.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-arrays.html">NumPy Arrays</a></h2>
-                <div class="summary"><p>NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays.
-                    <a class="btn btn-default btn-xs" href="/numpy-arrays.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stiffness-method-dof-numbering.html">Direct Stiffness Method - Degree of Freedom Numbering</a></h2>
-                <div class="summary"><p>An introduction to numbering degree of freedom numbers for direct stiffness method of analysis of skeletal structures.
-<!-- PELICAN_END_SUMMARY --></p>
-<p>Direct stiffness method of analysis of skeletal structures represents skeletal structures using one dimensional truss or beam elements and sets up the stiffness equation, namely:</p>
-<p>$$[K]{x} = {P}$$</p>
-<p>where $[K]$ is the structure ...</p><script type= "text/javascript">
+                <p>Installing scientific Python software and a review of some popular scientific Python distributions.<!-- PELICAN_END_SUMMARY --></p>
+<p>Python is a versatile and complete scientific computing environment. With NumPy, SciPy and Matplotlib modules, it gets most of the capabilities that one finds in a barebones Matlab environment. After this, you can choose the modules appropriate to your applications. For example, Pandas adds data structures and analysis tools for data analysis. SymPy brings symbolic computing to Python. Then there are the development environments that aid exploratory computing - IPython, Spyder, IEP to name a few. And the game changer, <strong>IPython Notebook</strong> - a web notebook that combines easy documentation using Markdown and $\LaTeX$ with live code, output and graphs that can be easily shared or exported to a number of formats. You couldn't ask for more.</p>
+<p>Setting up a simple scientific computing environment in Python is also a straight forward matter. Download Python, <code>setuptools</code>, <code>easy_install</code> and <code>pip</code>. Then use <code>pip</code> to download and install NumPy, SciPy, Matplotlib, IPython, IPython-notebook, Pandas, SymPy and any other module you wish to use. You can choose either Python 2 or Python 3. However, choosing Python 2 is the preferred choice at present, especially if some modules you wish to use may not yet be ported to Python 3 as yet.</p>
+<p>Some modules such as Cython may require Python development libraries be installed and <code>gcc</code> compiler be available. While this may not pose a problem for GNU/Linux or Mac OS X users, it can be a pain for Windows users. Fortunately, pre-compiled 32-bit and 64-bit binary versions for Windows, for both Python 2 and Python 3, are available at <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">Christoph Gohlke's Python Windows binaries</a>. However, if you end up with a situation where things do not work, it is best to try one of the ready to install scientific Python distributions, described below.</p>
+<p>With Python gaining significant ground in scientific computing and data analysis, several scientific Python distributions are now available. Notable among them are:</p>
+<ol>
+<li><a href="http://store.continuum.io/cshop/anaconda">Anaconda by Continuum Analytics</a></li>
+<li><a href="https://www.enthought.com/products/canopy/">Enthought Canopy by Enthought</a></li>
+</ol>
+<p>As of this writing, Anaconda has distributions with Python 2 and Python 3 in 32-bit and 64-bit for GNU/Linux, Windows and Mac OS X. Enthought has a Python 2 based distribution in 32-bit and 64-bit for GNU/Linux, Windows and Mac OS X. Both have their own package manager, similar to <code>pip</code>. Anaconda package manager <code>conda</code>, in addition to managing packages, can also create virtual Python environments similar to <code>virtualenv</code>.</p><script type= "text/javascript">
     if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
         var mathjaxscript = document.createElement('script');
         mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -142,36 +125,21 @@ Satish Annigeri's Blog            </a>
     }
 </script>
 
-                    <a class="btn btn-default btn-xs" href="/direct-stiffness-method-dof-numbering.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ipython-notebook.html">IPython Notebook</a></h2>
-                <div class="summary"><p>Interactive Python in your browser.
-                    <a class="btn btn-default btn-xs" href="/ipython-notebook.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/python-class-for-numerical-integration.html">A Python Class for Numerical Integration</a></h2>
-                <div class="summary"><p>A Python class implementation of Trapezoidal and Simpson's 1/3 rules. 
-                    <a class="btn btn-default btn-xs" href="/python-class-for-numerical-integration.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-    <ul class="pagination">
-            <li class="prev disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a
-                        href="/index.html">1</a></li>
-                <li class=""><a
-                        href="/index2.html">2</a></li>
-                <li class=""><a
-                        href="/index3.html">3</a></li>
-            <li class="next"><a
-                    href="/index2.html">&raquo;</a></li>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/ipython-notebook.html">IPython Notebook</a></li>
+        <li><a href="/scientific-python-develeopment-tools.html">Scientific Python Development Tools</a></li>
+        <li><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></li>
+        <li><a href="/numpy-arrays.html">NumPy Arrays</a></li>
+        <li><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></li>
     </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3 well well-sm" id="sidebar">
 

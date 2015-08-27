@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Importing Modules into a Python Program - Satish Annigeri's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Importing Modules into a Python Program"/>
+            <meta property="og:url" content="/importing-module-into-a-python-program.html"/>
+            <meta property="og:description" content="In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/borland.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Satish Annigeri's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/importing-module-into-a-python-program.html"
+                       rel="bookmark"
+                       title="Permalink to Importing Modules into a Python Program">
+                        Importing Modules into a Python Program
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2013-01-04T00:00:00"> 04 Jan, 2013</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/programming.html">Programming</a>
+        /
+	<a href="/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module. </p>
+<p>"Modules" in Python are what other programming languages call "libraries". You import a module with the import statement. Modules typically contain valid lines of Python code, which get included into your Python program, at the line where the import statement appears, verbatim. Hence a module can import variables, functions, classes or executable statements.</p>
+<p>In addition to importing lines of code, a module also introduces a new namespace into your program, which is the same as the name of the module. A namespace isolates code imported from a module from the code in your own program. Consequently, to call a function named <code>func</code> defined in a module named <code>mod</code>, the function call is <code>mod.func()</code>. For example, to call the function <code>sqrt()</code> in the module <code>math</code>, first import the <code>math</code> module and then call it as <code>math.sqrt(4)</code>. The program snippet to this is shown below:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>The output from the above lines is 2.0. The advantage of creating a separate namespace is that, if you so wish for whatever reason, you can define your own function with the name <code>sqrt()</code>, same as the one in the <code>math</code> module.</p>
+<p>If you find this method of calling functions from a module cumbersome, it is possible to merge the code from the module into the default namespace in which your own program exists. Then you could call the imported function directly without having to refer to its module name. But then you would lose the ability to define your own function having the same name as the one imported from the module. The following lines of code demonstrate how to accomplish this:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The above import statement imports everything from the math module and merges it with your own program. Sometimes, you may wish to import only the function <code>sqrt()</code> from the math module instead of importing everything. This is accomplished as follows:</p>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+
+<p>There is another way to import a module. Suppose you wish to import a module into its own namespace but want to assign a shorter alternative name to the module so that you can save on some typing. For example, it is standard practice to import the NumPy module and assign the name <code>np</code> to it. From then on, you can refer to the module by the alternate alias that you assigned to it. Here is an example.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">501</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can do the same to a function name instead of to a module, that is, assign an alternative name to a function imported from a module.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy.sqrt</span> <span class="kn">as</span> <span class="nn">npsqrt</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">501</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">npsqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Whatever I described with reference to a function can be extended to a class or a variable imported from a module.</p>
+<p>It is possible that a module is organized into submodules, especially if a module is large and contains many functions. For example, Matplotlib and SciPy modules contain a number of submodles. It is then necessary to address functions contained in submodules using the full path to the function. For example</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">scipy.linalg</span>
+<span class="k">print</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span>
+<span class="k">print</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span>
+</pre></div>
+
+
+<p>This imports <code>scipy.linalg</code> submodule, which can be demonstrated with the two print statements that print out information about the <code>scipy.linalg</code> module and the <code>solve</code> function in the <code>scipy.linalg</code> module.</p>
+<p>You must note that importing a module or a submodule creates a new namespace and imports the functions, classes and variables present in the submodule that is imported. However, importing a module does not automatically import its submodules and the contents of the submodules. Each submodule must be imported separately. Therefore the following lines result in an error:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">scipy</span>
+<span class="k">print</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span>
+</pre></div>
+
+
+<p>It is possible to write your own modules so that you or others who have access to your modules can import them into programs. If you wish to do so, remember that the name of the file (without the ".py" filename extension is automatically the name of the module.</p>
+<p>Typically, the Python interpreter searches for modules at predefined directories. To import a module, it must be in one of the pre-defined directories that Python interpreter searches in or in the same directory where the file containing your program resides. If the module file is in a different directory, then you must define an environment variable called <code>PYTHONPATH</code> whose value is a string containing the list of directories that the Python interpreter will search for modules. Multiple directory name must be separated by a colon (Linux/Unixes) or a semicolon (Windows). The directory name separator is, in fact, defined by os.pathsep.</p>
+<p>If there is a section (or sections) of your module file that you do not wish to be executed when the file is imported as a module but that you wish to execute if the file is executed as a script, put that section of the code within a if <code>__name__ == '__main__'</code> conditional block. Here is an example:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">statement1</span>
+  <span class="n">statement2</span>
+  <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">myfinc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">print</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>Python interpreter assigns a name to each module it interprets and executes, and the name of a module is available in the built-in variable <code>__name__</code>. Thus the statements in such a block are to be executed only if the name of the module from where the file is being executed happens to be <code>'__main__'</code>, a string constant. The lines will not be executed if the name of the module from where the file is executed is anything other than <code>'__main__'</code>. If the file is imported, the name of the module is the name of the Python file containing the code and lines in this block will not be executed. If on the other hand, the file is being executed by the Python interpreter as a script, the name of the main module is <code>'__main__'</code> and consequently, lines in such a block are executed.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/writing-a-python-function.html">Writing a Python Function</a></li>
+        <li><a href="/python-classes.html">Python Classes</a></li>
+        <li><a href="/python-class-for-quadratic-equation.html">Python Class for Quadratic Equations</a></li>
+        <li><a href="/plot-graphs-of-trigonometric-functions-using-python.html">Plot Graphs of Trigonometric Functions using Python</a></li>
+        <li><a href="/python-function-for-trapezoidal-rule.html">Python function for Trapezoidal Rule</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="https://twitter.com/satish_annigeri"><i
+                            class="fa fa-twitter-square fa-lg"></i> Twitter
+                    </a></li>
+                    <li class="list-group-item"><a href="http://in.linkedin.com/in/satishannigeri/"><i
+                            class="fa fa-linkedin-square fa-lg"></i> LinkedIn
+                    </a></li>
+                    <li class="list-group-item"><a href="http://github.com/satish-annigeri"><i
+                            class="fa fa-github-square fa-lg"></i> github
+                    </a></li>
+                  </ul>
+                </li>
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="/category/misc.html">
+                                <i class="fa fa-folder-open fa-lg"></i> misc
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/programming.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/scicomp.html">
+                                <i class="fa fa-folder-open fa-lg"></i> SciComp
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/structural-engg.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Structural Engg
+                            </a>
+                        </li>
+                </li>
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/python.html">
+                                Python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/programming.html">
+                                Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/oop.html">
+                                OOP
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numerical-methods.html">
+                                Numerical Methods
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/c.html">
+                                C++
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/arrays.html">
+                                Arrays
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/scientific-computing.html">
+                                Scientific Computing
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numpy.html">
+                                NumPy
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/direct-stiffness-method.html">
+                                Direct Stiffness Method
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/structural-analysis.html">
+                                Structural Analysis
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/ipython.html">
+                                IPython
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/foss.html">
+                                FOSS
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/fortran.html">
+                                Fortran
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/scilab.html">
+                                Scilab
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/notebook.html">
+                                Notebook
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/matplotlib.html">
+                                Matplotlib
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/book-review.html">
+                                Book Review
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/blogging.html">
+                                Blogging
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/people.html">
+                                People
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://store.continuum.io/cshop/anaconda/" target="_blank">
+                Anaconda
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Satish Annigeri
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-53542526-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>NumPy Array Indexing - Satish Annigeri's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="NumPy Array Indexing"/>
+            <meta property="og:url" content="/numpy-array-indexing.html"/>
+            <meta property="og:description" content="Extracting values from and inserting values into a Python list object is intuitive and powerful."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/borland.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Satish Annigeri's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/numpy-array-indexing.html"
+                       rel="bookmark"
+                       title="Permalink to NumPy Array Indexing">
+                        NumPy Array Indexing
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-05-24T00:00:00"> 24 May, 2012</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/numpy.html">NumPy</a>
+        /
+	<a href="/tag/arrays.html">Arrays</a>
+        /
+	<a href="/tag/scientific-computing.html">Scientific Computing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Extracting values from and inserting values into a Python list object is intuitive and powerful.</p>
+<p>This post demonstrates how to access elements of a Python list object. Once this concept is understood for a list, it can be easily extended to multi dimensioned NumPy arrays in a straight forward manner.</p>
+<p>Let us first generate a list containing 10 elements, with values starting from 0 upto 9 at an increment of 1. This is easily done using the <code>range()</code> function:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">list</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+
+<p>The list <code>x</code> has 10 elements, indexed from 0 to 9. Accessing any element of <code>x</code> requires you to know the index of the element. <code>x[0]</code> returns the value of the initial element, namely 0. The following for loop prints the values of the elements in <code>x</code>:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+      <span class="k">print</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span>
+</pre></div>
+
+
+<p>The same goes for insertion:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+      <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+      <span class="k">print</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="mi">0</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">8</span> <span class="mi">10</span> <span class="mi">12</span> <span class="mi">14</span> <span class="mi">16</span> <span class="mi">18</span>
+</pre></div>
+
+
+<p>Of course, you could access any element you wish:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="mi">8</span>
+</pre></div>
+
+
+<p>Python allows indexing from the end of the list. The index of the last element is -1. Thus, <code>x[-1]</code> accesses the last element with the value 9. The index of the initial element, counted from the end of the array is -10, hence <code>x[-10]</code> returns the value of the initial element.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="mi">9</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+  <span class="mi">0</span>
+<span class="o">&gt;&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+      <span class="k">print</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+<span class="mi">9</span> <span class="mi">8</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">4</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>In addition to accessing individual elements of a list, it is possible to access a range of elements. To return a list containing the first three elements of <code>x</code>, the syntax is:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+  <span class="nb">list</span>
+<span class="o">&gt;&gt;</span><span class="n">y</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Note that the object <code>y</code> is of type list. Further, the notation 0:3 means starting from 0, up to but not including, 3. Thus the values returned are from <code>x[0]</code> to <code>x[2]</code>, namely, 0, 1 and 2. See if you find what the following expressions will return:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+
+<p>While specifying a range of indices, it is possible to specify the step increment as shown the last two expressions above, which print out the values of the even numbered and odd numbered elements.</p>
+<p>It is also possible to leave out one or more of the start and end indices if they happen to be the first or the last. It is possible to leave out the increment if it is 1. Thus <code>x[:]</code> is the same as <code>x</code>.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[:]</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[::]</span>
+  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Insertion works in a similar way, as long as the object on the right hand side matches that on the left hand side:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span>
+  <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+
+<p>The above syntax for extraction, when used on the left hand side does insertion.</p>
+<p>The exact syntax will work with a NumPy array. You can test it out by replacing the command that generates the list with the command that generates a NumPy array, namely:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="o">&gt;&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+
+<p>We first created a one-dimensioned NumPy array with 12 elements using the list of integers generated by the <code>range(0,12)</code> function and reshaped it into a two dimensioned array with 3 rows and 4 columns. Note that the shape is specified as a Tuple <code>(3, 4)</code> and not as two integers <code>3, 4</code>. We can now perform similar indexing operations on the NumPy array.</p>
+<ol>
+<li>Access an individual element by its row and column number: <code>print a[2, 0]</code> displays the element on last row first column.</li>
+<li>Access one full row: <code>print a[1, :]</code> prints the entire second row. The column index range <code>:</code> implies "all columns"</li>
+<li>Access one full column: <code>print a[:, 3]</code> prints all elements of the last row. Note that you get back a one dimensioned array. The same could also be done this way <code>print a[:, -1]</code> because the index <code>-1</code> implies "last"</li>
+<li>Access a sub-array: <code>print a[0:2, 0:3]</code> prints the sub-array with 2 rows and 3 columns, containing rows 0 and 1 and columns 0, 1 and 2</li>
+</ol>
+<p>There are more tricks you could perform. <code>print a[:, ::2]</code> prints all rows and columns 0 and 2. The statement <code>print a[:, -1::-1]</code> prints all rows with the columns reversed. The general rules are:</p>
+<ol>
+<li>The row or column index can be a single integer or a list.</li>
+<li>The list can be either generated or explicitly input.</li>
+<li>When the list is generated, it can specify either start and end (in which case the increment is assumed to be 1) or it can specify start, end and increment/decrement. If start value is smaller give an increment otherwise a decrement</li>
+<li>Negative values imply indexing in the reverse direction with <code>-1</code> representing last and <code>-2</code> last but one and so on</li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/numpy-arrays.html">NumPy Arrays</a></li>
+        <li><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></li>
+        <li><a href="/ipython-notebook.html">IPython Notebook</a></li>
+        <li><a href="/scientific-python-develeopment-tools.html">Scientific Python Development Tools</a></li>
+        <li><a href="/plot-graphs-of-trigonometric-functions-using-python.html">Plot Graphs of Trigonometric Functions using Python</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="https://twitter.com/satish_annigeri"><i
+                            class="fa fa-twitter-square fa-lg"></i> Twitter
+                    </a></li>
+                    <li class="list-group-item"><a href="http://in.linkedin.com/in/satishannigeri/"><i
+                            class="fa fa-linkedin-square fa-lg"></i> LinkedIn
+                    </a></li>
+                    <li class="list-group-item"><a href="http://github.com/satish-annigeri"><i
+                            class="fa fa-github-square fa-lg"></i> github
+                    </a></li>
+                  </ul>
+                </li>
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="/category/misc.html">
+                                <i class="fa fa-folder-open fa-lg"></i> misc
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/programming.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/scicomp.html">
+                                <i class="fa fa-folder-open fa-lg"></i> SciComp
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/structural-engg.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Structural Engg
+                            </a>
+                        </li>
+                </li>
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/python.html">
+                                Python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/programming.html">
+                                Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/oop.html">
+                                OOP
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numerical-methods.html">
+                                Numerical Methods
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/c.html">
+                                C++
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/arrays.html">
+                                Arrays
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/scientific-computing.html">
+                                Scientific Computing
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numpy.html">
+                                NumPy
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/direct-stiffness-method.html">
+                                Direct Stiffness Method
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/structural-analysis.html">
+                                Structural Analysis
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/ipython.html">
+                                IPython
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/foss.html">
+                                FOSS
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/fortran.html">
+                                Fortran
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/scilab.html">
+                                Scilab
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/notebook.html">
+                                Notebook
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/matplotlib.html">
+                                Matplotlib
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/book-review.html">
+                                Book Review
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/blogging.html">
+                                Blogging
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/people.html">
+                                People
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://store.continuum.io/cshop/anaconda/" target="_blank">
+                Anaconda
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Satish Annigeri
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-53542526-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

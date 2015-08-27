@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>NumPy Arrays - Satish Annigeri's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="NumPy Arrays"/>
+            <meta property="og:url" content="/numpy-arrays.html"/>
+            <meta property="og:description" content="NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/borland.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Satish Annigeri's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/numpy-arrays.html"
+                       rel="bookmark"
+                       title="Permalink to NumPy Arrays">
+                        NumPy Arrays
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-04-12T00:00:00"> 12 Apr, 2012</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/numpy.html">NumPy</a>
+        /
+	<a href="/tag/arrays.html">Arrays</a>
+        /
+	<a href="/tag/scientific-computing.html">Scientific Computing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays.</p>
+<p>In <strong>Scilab</strong>, all arrays are treated as two dimensional arrays. Therefore, size of a scalar in Scilab is reported as 1x1, that is 1 row and 1 column. So, there is no such thing as a vector or a one-dimensioned array. A row vector is a matrix with only one row while a column vector is a matrix with only one column. Of course, Scilab does support arrays with more than 2 dimensions. The size of an object in Scilab is reported by the function <code>size()</code> and number of elements is reported by the function <code>length()</code>.</p>
+<div class="highlight"><pre><span class="o">--&gt;</span><span class="no">a</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="o">--&gt;</span><span class="nb">typeof</span><span class="p">(</span><span class="no">a</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+<span class="n">constant</span>
+<span class="o">--&gt;</span><span class="nb">size</span><span class="p">(</span><span class="no">a</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">1.</span>   <span class="mf">1.</span>
+<span class="o">--&gt;</span><span class="nb">length</span><span class="p">(</span><span class="no">a</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">1.</span>
+<span class="o">--&gt;</span><span class="n">b</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="o">--&gt;</span><span class="nb">typeof</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+<span class="n">constant</span>
+<span class="o">--&gt;</span><span class="nb">size</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">3.</span>   <span class="mf">4.</span>
+<span class="o">--&gt;</span><span class="nb">length</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">12.</span>
+<span class="o">--&gt;</span><span class="n">c</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="o">--&gt;</span><span class="nb">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+<span class="nb">hypermat</span>
+<span class="o">--&gt;</span><span class="nb">size</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">3.</span>   <span class="mf">4.</span>   <span class="mf">5.</span>
+<span class="o">--&gt;</span><span class="nb">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="no">ans</span>  <span class="p">=</span>
+   <span class="mf">3.</span>
+</pre></div>
+
+
+<p>Observe that the three dimensioned array <code>c</code> is of type <strong>hypermat</strong> and not constant (like <code>a</code> and <code>b</code>).</p>
+<p>Unlike Scilab, <strong>NumPy</strong> defines a generalized n-dimensioned (<code>numpy.ndarray</code>) array. Thus scalars, vectors, matrices and arrays with higher dimensions are all distinct. A vector has only one dimension, a matrix has two dimensions and it is possible to define arrays with arbitrarily any number of dimensions. The size of an array is reported by the object attribute <code>shape</code>, which returns a tuple containing the size of each dimension. Attribute <code>shape</code> is specific to <code>numpy.ndarray</code> and cannot be applied to non-NumPy objects. Therefore, scalars are distinct from arrays. Vector is an array with the least number of dimensions, namely, one. Matrices are arrays with two dimensions. There can be arrays with higher dimensions.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="o">&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">])</span>
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">(</span><span class="il">1L</span><span class="p">,)</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">(</span><span class="il">3L</span><span class="p">,)</span> <span class="mi">3</span> <span class="mi">3</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+
+<span class="o">&gt;&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span> <span class="p">])</span>
+
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="p">(</span><span class="il">3L</span><span class="p">,</span> <span class="il">4L</span><span class="p">)</span> <span class="mi">12</span> <span class="mi">3</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;</span><span class="n">c</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="p">(</span><span class="il">3L</span><span class="p">,</span> <span class="il">4L</span><span class="p">,</span> <span class="il">5L</span><span class="p">)</span> <span class="mi">60</span> <span class="mi">3</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s">&#39;numpy.ndarray&#39;</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span>  <span class="mi">4</span>  <span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="mi">3</span>  <span class="mi">4</span>  <span class="mi">5</span>
+</pre></div>
+
+
+<p>So here is what the attribute shape, and functions <code>size()</code> and <code>len()</code> report:
+1. <code>shape</code> returns a tuple. The elements of the tuple give the lengths of the corresponding array dimensions
+2. <code>size()</code> returns the number of elements along a given axis. The axis along which the elements are counted is an optional second argument. If it is not given, by default, size returns the total number of elements
+3. <code>len()</code> returns the number of items of a sequence or a mapping. Thus, <code>len(c)</code> is 3, <code>len(c[0])</code> is 4 and <code>len(c[0, 0])</code> is 5. Note that <code>c</code> is the entire 3-dimensioned ndarray, <code>c[0]</code> is the first item of the 3-dimensioned array, which is a 2-dimensioned array and <code>c[0, 0]</code> is the first item of <code>c[0]</code> and hence a 1-dimensioned array.</p>
+<p>One advantage that NumPy <code>ndarray</code> has is that it can be reshaped (without changing the data) as long as the total number of elements remains unchanged. Therefore, a matrix of size 3x4 can be reshaped to 6x2 or 4x3 because they all have exactly 12 elements. In fact, it could be reshaped to a vector or to a 3 dimensioned array too.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="p">])</span>
+<span class="o">&gt;&gt;</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="p">(</span><span class="il">3L</span><span class="p">,</span> <span class="il">4L</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">],</span>
+       <span class="o">...</span>
+       <span class="p">[</span><span class="mi">11</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">12</span><span class="p">]])</span>
+<span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">]],</span>
+
+       <span class="p">[[</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">]],</span>
+
+       <span class="p">[[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]])</span>
+</pre></div>
+
+
+<p>This is what we did:
+1. Created a 2-dim array of size 3x4
+2. Reshaped it to a 1-dim array with 12 elements
+3. Then reshaped it to a 2-dim array with 12 rows and 1 column
+4. Finally reshaped it to a 3-dim array of size 3x2x2 (3 card with each card having 2 rows and 2 columns)</p>
+<p>While reshaping arrays, it is possible to leave size of one of the dimensions unspecified and let Python work out the required size (as long as a size is possible). Thus, specifying the size of one of the dimensions as -1 indicates that the corresponding size must be computed by NumPy.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+<span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>If it is not possible to have the specified shape, Python reports an error.</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="o">------------------------------------</span>
+<span class="ne">ValueError</span>
+   <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+   <span class="o">...</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">total</span> <span class="n">size</span> <span class="n">of</span> <span class="n">new</span> <span class="n">array</span> <span class="n">must</span> <span class="n">be</span> <span class="n">unchanged</span>
+</pre></div>
+
+
+<p>Python arrays, are by default, row-major arrays (similar to C arrays) wherein the elements are ordered row by row. But the concept of rows and columns breaks down for arrays with 3 or more dimensions. Hence, it is better to say that the elements are arranged in an order where the right most index varies fastest and left most index varies slowest when the elements are arranged in a 1-dim array. In contrast, column major arrays (similar to Fortran arrays) are arranged such that the left most index varies fastest and right most index varies slowest. It is possible to alter this arrangement of elements using the third optional argument to <code>reshape()</code>, namely, <code>order='C'</code> (row-major arrangement), <code>order='F'</code> (column-major arrangement) or <code>order='A'</code> (preserve existing arrangement).</p>
+<p>Hint: Using IPython, you could learn all of this quickly using online help. To get help on <code>reshape</code>, type <code>reshape?</code> at the IPython prompt and press Enter key.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></li>
+        <li><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></li>
+        <li><a href="/ipython-notebook.html">IPython Notebook</a></li>
+        <li><a href="/scientific-python-develeopment-tools.html">Scientific Python Development Tools</a></li>
+        <li><a href="/plot-graphs-of-trigonometric-functions-using-python.html">Plot Graphs of Trigonometric Functions using Python</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="https://twitter.com/satish_annigeri"><i
+                            class="fa fa-twitter-square fa-lg"></i> Twitter
+                    </a></li>
+                    <li class="list-group-item"><a href="http://in.linkedin.com/in/satishannigeri/"><i
+                            class="fa fa-linkedin-square fa-lg"></i> LinkedIn
+                    </a></li>
+                    <li class="list-group-item"><a href="http://github.com/satish-annigeri"><i
+                            class="fa fa-github-square fa-lg"></i> github
+                    </a></li>
+                  </ul>
+                </li>
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="/category/misc.html">
+                                <i class="fa fa-folder-open fa-lg"></i> misc
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/programming.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/scicomp.html">
+                                <i class="fa fa-folder-open fa-lg"></i> SciComp
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/structural-engg.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Structural Engg
+                            </a>
+                        </li>
+                </li>
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/python.html">
+                                Python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/programming.html">
+                                Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/oop.html">
+                                OOP
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numerical-methods.html">
+                                Numerical Methods
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/c.html">
+                                C++
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/arrays.html">
+                                Arrays
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/scientific-computing.html">
+                                Scientific Computing
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numpy.html">
+                                NumPy
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/direct-stiffness-method.html">
+                                Direct Stiffness Method
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/structural-analysis.html">
+                                Structural Analysis
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/ipython.html">
+                                IPython
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/foss.html">
+                                FOSS
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/fortran.html">
+                                Fortran
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/scilab.html">
+                                Scilab
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/notebook.html">
+                                Notebook
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/matplotlib.html">
+                                Matplotlib
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/book-review.html">
+                                Book Review
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/blogging.html">
+                                Blogging
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/people.html">
+                                People
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://store.continuum.io/cshop/anaconda/" target="_blank">
+                Anaconda
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Satish Annigeri
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-53542526-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

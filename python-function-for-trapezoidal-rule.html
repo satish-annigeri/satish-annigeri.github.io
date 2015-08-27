@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python function for Trapezoidal Rule - Satish Annigeri's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Python function for Trapezoidal Rule"/>
+            <meta property="og:url" content="/python-function-for-trapezoidal-rule.html"/>
+            <meta property="og:description" content="Implementing a function for numerical integration using trapezoidal rule."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/borland.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Satish Annigeri's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about-me.html">
+                             About Me
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/python-function-for-trapezoidal-rule.html"
+                       rel="bookmark"
+                       title="Permalink to Python function for Trapezoidal Rule">
+                        Python function for Trapezoidal Rule
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-02-14T00:00:00"> 14 Feb, 2012</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/programming.html">Programming</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/numerical-methods.html">Numerical Methods</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Implementing a function for numerical integration using trapezoidal rule. <!-- PELICAN_END_SUMMARY --></p>
+<p>Here is the input I am assuming will be available:
+A function of 'x' which we want to integrate. For illustration, let f(x) = 2x2 - x - 4. That is, the coefficients 2, -1 and -4.
+The interval over which the function f(x) is to be integrated. In this illustration, say, from a=0 to b=5
+The number of equal intervals into which the interval from a to b is to be divided. For this example, let us take n = 4
+Then this is the hand calculation so that we can test our function when it is complete.</p>
+<div class="highlight"><pre>       <span class="n">x</span>         <span class="n">y</span>
+   <span class="mf">0.000</span>    <span class="o">-</span><span class="mf">4.000</span>
+   <span class="mf">1.250</span>    <span class="o">-</span><span class="mf">2.125</span>
+   <span class="mf">2.500</span>     <span class="mf">6.000</span>
+   <span class="mf">3.750</span>    <span class="mf">20.375</span>
+   <span class="mf">5.000</span>    <span class="mf">41.000</span>
+</pre></div>
+
+
+<p>Using the trapezoidal rule, the value of the integral of $f(x)$ from $a=0$ to $b=5$ is given as:
+$$ \int_0^5 f(x) = \frac{b - a}{n} \left[ y_0 + 2 (y_1 + y_2 + \cdots + y_{n-1}) + y_{n} \right]$$
+where $h = \frac{(b - a)}{n}$ is the constant interval width and $n$ is the number of equal intervals.</p>
+<p>Doing this calculation by hand, we get $I = 53.4375$. For the given function, finding the integral by hand is straight forward and we can calculate the value of the integral by hand, which turns out to be $50.8333$. Thus trapezoidal rule results in a value with an error of $5.12\%$ compared to the correct value.</p>
+<p>Let us now implement a function in Python to do the same calculations.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">4.0</span>
+
+<span class="k">def</span> <span class="nf">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>     <span class="c"># printed only when debug == True</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">print</span> <span class="s">&quot;</span><span class="si">%5d</span><span class="s"> </span><span class="si">%10.4f</span><span class="s"> </span><span class="si">%10.4f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">*</span> <span class="n">h</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>     <span class="c"># Main function</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>     <span class="c"># Setup input values</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="c"># call trapezoidal function</span>
+    <span class="k">print</span> <span class="n">s</span>                           <span class="c"># print result</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Note the following:</p>
+<ol>
+<li>
+<p>The first function <code>f(x)</code> is the function to be integrated. This will need to be replaced if you wish to integrate a different function rather than the one used in this illustration.</p>
+</li>
+<li>
+<p>Second function <code>trapezoidal(f, a, b, n, debug=False)</code> is our user defined function to perform integration by trapezoidal rule. It takes the function to be integrated as its first parameter. The limits of integration are the second and third parameters. The fourth parameter is the number of equal intervals into which the interval from a to b will be divided. The last parameter, which is set to False by default lets you tell the function whether you want it to print the calculated values of x and y.</p>
+</li>
+<li>
+<p>Function <code>main()</code> sets up the input values, calls the function to calculate the integral and prints the result.</p>
+</li>
+<li>
+<p>We ensure that the function <code>main()</code> is called only when this script is executed as the main program. It will not be executed if the script is imported as a module.</p>
+</li>
+</ol>
+<p>Running the script prints the result as 53.4375. Running the script by changing the value of <code>n</code> shows that the result improves if we divide into larger number of intervals. Here is the modified function <code>main()</code> to do this:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%5d</span><span class="s"> </span><span class="si">%12.4f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;</span><span class="si">%5d</span><span class="s"> </span><span class="si">%12.4f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;</span><span class="si">%5d</span><span class="s"> </span><span class="si">%12.4f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This will produce the output:</p>
+<div class="highlight"><pre>    <span class="mi">4</span>     <span class="mf">53.4375</span>
+
+   <span class="mi">10</span>     <span class="mf">51.2500</span>
+
+   <span class="mi">20</span>     <span class="mf">50.9375</span>
+</pre></div>
+
+
+<p>Here are somethings you can try:</p>
+<ol>
+<li>
+<p>Write a class to implement trapezoidal rule. What are the merits and demerits of writing classes instead of functions?</p>
+</li>
+<li>
+<p>Write a function to evaluate the integral using Simpson's 1/3 rule and compare the results with the results of trapezoidal rule.</p>
+</li>
+<li>
+<p>Write a function to evaluate the integral by the Simpson's 1/3 rule when the number of intervals is odd, by using Simpson's 1/3 rule up to last but one interval and trapezoidal rule for the last interval.
+Write a function to evaluate the integral using Gauss Legndre quadrature and compare the results with those of trapezoidal rule ans Simpson's 1/3 rule</p>
+</li>
+</ol><script type= "text/javascript">
+    if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+        var mathjaxscript = document.createElement('script');
+        mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+        mathjaxscript.type = 'text/javascript';
+        mathjaxscript.src = 'https:' == document.location.protocol
+                ? 'https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+                : 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+        mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+            "MathJax.Hub.Config({" +
+            "    config: ['MMLorHTML.js']," +
+            "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+            "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+            "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+            "    displayAlign: 'center'," +
+            "    displayIndent: '0em'," +
+            "    showMathMenu: true," +
+            "    tex2jax: { " +
+            "        inlineMath: [ ['$','$'] ], " +
+            "        displayMath: [ ['$$','$$'] ]," +
+            "        processEscapes: true," +
+            "        preview: 'TeX'," +
+            "    }, " +
+            "    'HTML-CSS': { " +
+            "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+            "    } " +
+            "}); ";
+        (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+    }
+</script>
+
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/python-class-for-numerical-integration.html">A Python Class for Numerical Integration</a></li>
+        <li><a href="/python-class-for-quadratic-equation.html">Python Class for Quadratic Equations</a></li>
+        <li><a href="/writing-a-python-function.html">Writing a Python Function</a></li>
+        <li><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></li>
+        <li><a href="/array-indexing-and-memory-allocation.html">Array Indexing and Memory Allocation in Programming Languages</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="https://twitter.com/satish_annigeri"><i
+                            class="fa fa-twitter-square fa-lg"></i> Twitter
+                    </a></li>
+                    <li class="list-group-item"><a href="http://in.linkedin.com/in/satishannigeri/"><i
+                            class="fa fa-linkedin-square fa-lg"></i> LinkedIn
+                    </a></li>
+                    <li class="list-group-item"><a href="http://github.com/satish-annigeri"><i
+                            class="fa fa-github-square fa-lg"></i> github
+                    </a></li>
+                  </ul>
+                </li>
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                    <ul class="list-group" id="categories">
+                        <li class="list-group-item">
+                            <a href="/category/misc.html">
+                                <i class="fa fa-folder-open fa-lg"></i> misc
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/programming.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/scicomp.html">
+                                <i class="fa fa-folder-open fa-lg"></i> SciComp
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/category/structural-engg.html">
+                                <i class="fa fa-folder-open fa-lg"></i> Structural Engg
+                            </a>
+                        </li>
+                </li>
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/python.html">
+                                Python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/programming.html">
+                                Programming
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-1">
+                            <a href="/tag/oop.html">
+                                OOP
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numerical-methods.html">
+                                Numerical Methods
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/c.html">
+                                C++
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/arrays.html">
+                                Arrays
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/scientific-computing.html">
+                                Scientific Computing
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-2">
+                            <a href="/tag/numpy.html">
+                                NumPy
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/direct-stiffness-method.html">
+                                Direct Stiffness Method
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-3">
+                            <a href="/tag/structural-analysis.html">
+                                Structural Analysis
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/ipython.html">
+                                IPython
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/foss.html">
+                                FOSS
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/fortran.html">
+                                Fortran
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/scilab.html">
+                                Scilab
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/notebook.html">
+                                Notebook
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/matplotlib.html">
+                                Matplotlib
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/book-review.html">
+                                Book Review
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/blogging.html">
+                                Blogging
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/people.html">
+                                People
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="https://store.continuum.io/cshop/anaconda/" target="_blank">
+                Anaconda
+            </a>
+        </li>
+      </ul>
+    </li>
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Satish Annigeri
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-53542526-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

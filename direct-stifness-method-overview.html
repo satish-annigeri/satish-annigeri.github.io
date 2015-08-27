@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Satish Annigeri's Blog</title>
+    <title>Direct Stiffness Method - An Overview - Satish Annigeri's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,10 +11,10 @@
     
 
     <!-- Open Graph tags -->
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content="Satish Annigeri's Blog"/>
-            <meta property="og:url" content=""/>
-            <meta property="og:description" content="Satish Annigeri's Blog"/>
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Direct Stiffness Method - An Overview"/>
+            <meta property="og:url" content="/direct-stifness-method-overview.html"/>
+            <meta property="og:description" content="A brief overview of the direct stiffness method as applicable to skeletal structures."/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="/theme/css/bootstrap.united.min.css" type="text/css"/>
@@ -56,62 +56,74 @@ Satish Annigeri's Blog            </a>
     <div class="row">
         <div class="col-sm-9">
 
-            <article>
-                <h2><a href="/installing-anaconda-scientific-python.html">Installing Anaconda Scientific Python on Microsoft Windows</a></h2>
-                <div class="summary"><p>Installing and managing Anaconda scientific Python distribution on Microsoft Windows
-                    <a class="btn btn-default btn-xs" href="/installing-anaconda-scientific-python.html">more ...</a>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/direct-stifness-method-overview.html"
+                       rel="bookmark"
+                       title="Permalink to Direct Stiffness Method - An Overview">
+                        Direct Stiffness Method - An Overview
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-05-22T00:00:00"> 22 May, 2012</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/structural-analysis.html">Structural Analysis</a>
+        /
+	<a href="/tag/direct-stiffness-method.html">Direct Stiffness Method</a>
+    
+</footer><!-- /.post-info -->                    </div>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/choosing-a-static-site-generator-for-blogs.html">Choosing a Static Site Generator for Blogs</a></h2>
-                <div class="summary"><p>Choosing a blogging tool is not as simple as it seems
-                    <a class="btn btn-default btn-xs" href="/choosing-a-static-site-generator-for-blogs.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/installing-python3-scientific-computing-environment.html">Installing a Python 3 Scientific Computing Environment</a></h2>
-                <div class="summary"><p>Installing scientific Python software and a review of some popular scientific Python distributions.
-                    <a class="btn btn-default btn-xs" href="/installing-python3-scientific-computing-environment.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/importing-module-into-a-python-program.html">Importing Modules into a Python Program</a></h2>
-                <div class="summary"><p>In Python, a module introduces a new namespace and adds functions, classes and variables into your programs, enabling them to do things which they would not be able to without the capabilities imported from the module. 
-                    <a class="btn btn-default btn-xs" href="/importing-module-into-a-python-program.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-array-indexing.html">NumPy Array Indexing</a></h2>
-                <div class="summary"><p>Extracting values from and inserting values into a Python list object is intuitive and powerful.
-                    <a class="btn btn-default btn-xs" href="/numpy-array-indexing.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stifness-method-overview.html">Direct Stiffness Method - An Overview</a></h2>
-                <div class="summary"><p>A brief overview of the direct stiffness method as applicable to skeletal structures. 
-                    <a class="btn btn-default btn-xs" href="/direct-stifness-method-overview.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/numpy-arrays.html">NumPy Arrays</a></h2>
-                <div class="summary"><p>NumPy ndarray is a versatile n-dim array implementation and quite different compared to Scilab matrices. Let us examine how NumPy and Scilab define and use arrays.
-                    <a class="btn btn-default btn-xs" href="/numpy-arrays.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/direct-stiffness-method-dof-numbering.html">Direct Stiffness Method - Degree of Freedom Numbering</a></h2>
-                <div class="summary"><p>An introduction to numbering degree of freedom numbers for direct stiffness method of analysis of skeletal structures.
-<!-- PELICAN_END_SUMMARY --></p>
-<p>Direct stiffness method of analysis of skeletal structures represents skeletal structures using one dimensional truss or beam elements and sets up the stiffness equation, namely:</p>
-<p>$$[K]{x} = {P}$$</p>
-<p>where $[K]$ is the structure ...</p><script type= "text/javascript">
+                <p>A brief overview of the direct stiffness method as applicable to skeletal structures. <!-- PELICAN_END_SUMMARY --></p>
+<p>The direct stiffness method is a matrix method of structural analysis. This post pertains only to the analysis of skeletal structures, that is, structures that can be modelled using only 1D truss/beam elements in either 2D or 3D space. Further, element stiffness is explicitly derived from first principles.</p>
+<p>In general, a direct stiffness method such as the Finite Element Method, is quite general and can model structures using 1D, 2D (Plate, Plane Stress, Plane Strain elements) and 3D (solid elements) elements in 2D or 3D space.</p>
+<p>Subject to the above mentioned limitations, the direct stiffness method is a procedure to solve the structure stiffness equation, namely</p>
+<p>$$ [k]\{ x \} = \{ P \} $$</p>
+<p>where $\left[ K \right]$ is the structure stiffness matrix, ${ x }$ is the displacement vector and ${ P }$  is the load vector. Depending on the specific problem being solved, $[K]$, ${ x }$ and ${ P }$  can be partitioned into sub-matrices, as follows:</p>
+<p>$$ \begin{bmatrix} K_{11} &amp; K_{12} &amp; K_{13} \\ K_{21} &amp; K_{22} &amp; K_{23} \\ K_{31} &amp; K_{32} &amp; K_{33} \end{bmatrix} \begin{Bmatrix} x_1 \ x_2 \ x_3 \end{Bmatrix} = \begin{Bmatrix} P_1 \ P_2 \ P_3 \end{Bmatrix}$$</p>
+<ul>
+<li>
+<p>Row 1: $[K_{11}]$, ${ P_1 }$ are known and ${ x_1 }$ is unknown and to be determined.</p>
+</li>
+<li>
+<p>Row 2: $[K_{22}]$, ${ x_2 }$ are known and ${ x_2 }$ has non-zero elements.  ${ P_2 }$ corresponds reaction components corresponding to known non-zero displacements ${ x_2 }$ and can be determined.</p>
+</li>
+<li>
+<p>Row 3: $[K_{33}]$, ${ x_3 }$ are known and ${ x_3 }$ has all zero elements.  ${ P_3 }$ corresponds reaction components corresponding to known zero displacements ${ x_3 }$ and can be determined. Since reactions can be computed indirectly from the force components at the ends of members meeting at the support, it is possible to leave out this part of the equation.</p>
+</li>
+</ul>
+<p>We can rewrite the above equation as three separate equations and each equation can then be rearranged to obtain the unknown in terms of the known, to obtain the following:</p>
+<p>$$[K_{11}] \{x_1=?\} + [K_{12}] \{x_2\} + [K_{13}] \{x_3=0\} = \{P_1\} \Rightarrow \{x_1\} = [K_{11}]^{-1} (\{P_1\}  - [K_{12}] {x_2}) \\
+[K_{21}] \{x_1\} + [K_{22}] \{x_2\} + [K_{23}] \{x_3=0\} = \{P_2=?\} \Rightarrow \{P_2\} = [K_{21}]\{x_1\} + [K_{22}] \{x_2\} \\
+[K_{31}] \{x_1\} + [K_{32}] \{x_2\} + [K_{33}] \{x_3=0\} = \{P_3=?\} \Rightarrow \{P_3\} = [K_{31}]\{x_1\} + [K_{32}] \{x_2\}
+$$</p>
+<p>In the above equations, unknown vectors are indicated by the question mark. Since {x3}={0}, its multiplication with any matrix is also zero.</p>
+<p>If the structure has only known zero displacements at supports and no known non-zero displacements (support settlements), the entire second row and second column of $[K]$, namely, $[K_{22}]$ as well as second sub-matrix ${P_2}$ and ${x_2}$ are null. In that case, it is only necessary to assemble $[K_{11}]$ in order to determine the unknown displacements ${x_1}$. In order to determine the reactions corresponding to known zero displacements, it is sufficient to assemble $[K_{31}]$ so that $[K_{31}]{x_1}={P_3}$.</p>
+<p>According to this scheme of solving the stiffness equation, the degrees of freedom are numbered in the sequence adopted above, namely, unknown displacements first, known non-zero displacements (if any) next and known zero displacements last.</p>
+<p>Accordingly, while assembling the stiffness matrix, the following stiffness matrices are assembled:</p>
+<ul>
+<li>
+<p>$[K_{11}]$ is required always</p>
+</li>
+<li>
+<p>$[K_{12}]$, $[K_{22}]$ and $[K_{32}]$ are required only if the the structure has one or more known non-zero displacements. None of them is required if the structure has no known non-zero displacements.</p>
+</li>
+<li>
+<p>$[K_{31]}$ and $[K_{32}]$ are required if reactions are to be computed. $[K_{31}]$ is not required if reactions are computed from member end forces.</p>
+</li>
+</ul>
+<p>Since it is possible to compute the reactions from the known forces at the ends of members (which in turn are obtained from known displacements at nodes), it is not necessary to use the second and third equations above (expanded from the stiffness equation expanded in terms of sub-matrices) to calculate the reactions. However, if there are known non-zero displacements in a structure, it is necessary to assemble $[K_{12}]$ in order to calculate ${x_1}$.</p><script type= "text/javascript">
     if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
         var mathjaxscript = document.createElement('script');
         mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -142,36 +154,17 @@ Satish Annigeri's Blog            </a>
     }
 </script>
 
-                    <a class="btn btn-default btn-xs" href="/direct-stiffness-method-dof-numbering.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/ipython-notebook.html">IPython Notebook</a></h2>
-                <div class="summary"><p>Interactive Python in your browser.
-                    <a class="btn btn-default btn-xs" href="/ipython-notebook.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/python-class-for-numerical-integration.html">A Python Class for Numerical Integration</a></h2>
-                <div class="summary"><p>A Python class implementation of Trapezoidal and Simpson's 1/3 rules. 
-                    <a class="btn btn-default btn-xs" href="/python-class-for-numerical-integration.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-    <ul class="pagination">
-            <li class="prev disabled"><a href="#">&laquo;</a></li>
-                <li class="active"><a
-                        href="/index.html">1</a></li>
-                <li class=""><a
-                        href="/index2.html">2</a></li>
-                <li class=""><a
-                        href="/index3.html">3</a></li>
-            <li class="next"><a
-                    href="/index2.html">&raquo;</a></li>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/direct-stiffness-method-dof-numbering.html">Direct Stiffness Method - Degree of Freedom Numbering</a></li>
     </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3 well well-sm" id="sidebar">
 
